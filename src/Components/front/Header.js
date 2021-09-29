@@ -6,7 +6,7 @@ export default function Header() {
       <Typography type='secondary'>
         WeChat <span className='text-sm'>v2.0</span>
       </Typography>
-      <Button btnType='primary'>Logout</Button>
+      <Button btnType='secondary'>Logout</Button>
     </div>
   );
 }
