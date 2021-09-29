@@ -16,5 +16,19 @@ export default function Button({ btnType, className, children, ...props }) {
         </motion.button>
       );
     }
+    default: {
+      return (
+        <motion.button
+          variants={buttonVariants}
+          initial='hidden'
+          animate='visible'
+          whileTap='whileTap'
+          {...props}
+          className={`${className}`}
+        >
+          {children}
+        </motion.button>
+      );
+    }
   }
 }

@@ -16,5 +16,8 @@ export default function Typography({ children, type, className }) {
         </p>
       );
     }
+    default: {
+      return <p className={`${className}`}>{children}</p>;
+    }
   }
 }
