@@ -10,7 +10,7 @@ export default function Button({ btnType, className, children, ...props }) {
           animate='visible'
           whileTap='whileTap'
           {...props}
-          className={`py-2 px-6 bg-blue-500 text-white font-medium rounded-lg ${className}`}
+          className={`py-2 px-6 bg-blue-500 text-white text-base font-medium rounded-lg ${className}`}
         >
           {children}
         </motion.button>

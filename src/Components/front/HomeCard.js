@@ -5,7 +5,7 @@ export default function SwiperCard({ data }) {
       <img
         src={data.src}
         alt='chat overview'
-        className='h-2/3 w-full center rounded'
+        className='h-2/3 w-full center object-cover rounded'
       ></img>
       <Typography type='primary'>{data.heading}</Typography>
       <Typography type='description'>{data.description}</Typography>

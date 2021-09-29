@@ -1,7 +1,8 @@
-import Wrapper from '../Components/Wrapper';
+import Wrapper from '../Components/layouts/Wrapper';
 import SwiperSection from '../Components/Swiper/SwiperSection';
-import SwiperCard from '../Components/front/SwiperCard';
+import SwiperCard from '../Components/front/HomeCard';
 import Button from '../Components/ui/Button';
+import GoogleOAuth from '../Components/lib/GoogleOAuth';
 const data = [
   {
     heading: "Let's Get Started",
@@ -29,8 +30,10 @@ export default function Home() {
       <div className='bg-gray-100 rounded flex flex-col justify-center items-center px-12 h-full'>
         <SwiperSection data={data} Component={SwiperCard} />
         <div className='flex flex-col justify-center mt-10 space-y-2'>
-          <Button btnType='primary'>Let's Get Started</Button>
-          <Button btnType='primary'>Sign Up</Button>
+          <Button btnType='primary'>Enter to the Chat World</Button>
+          <div className='ml-3'>
+            <GoogleOAuth />
+          </div>
         </div>
       </div>
     </Wrapper>

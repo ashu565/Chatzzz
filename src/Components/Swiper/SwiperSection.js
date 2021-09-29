@@ -7,19 +7,11 @@ import 'swiper/swiper-bundle.css';
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 const SwiperSection = ({ data, Component }) => {
   return (
-    <Swiper
-      spaceBetween={50}
-      slidesPerView={1}
-      pagination
-      loop
-      autoplay
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      {data.map((curr, index) => {
+    <Swiper spaceBetween={50} slidesPerView={1} pagination loop autoplay>
+      {data.map((cardInformation, index) => {
         return (
           <SwiperSlide key={index}>
-            <Component data={curr} />
+            <Component data={cardInformation} />
           </SwiperSlide>
         );
       })}
