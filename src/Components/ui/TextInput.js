@@ -1,5 +1,6 @@
 import Typography from './Typography';
 import { useMemo } from 'react';
+import { RiSendPlaneFill } from 'react-icons/ri';
 import { nanoid } from 'nanoid';
 export default function TextInput({
   type,
@@ -8,6 +9,7 @@ export default function TextInput({
   value,
   setValue,
   inputClassName,
+  className,
 }) {
   const id = useMemo(() => nanoid(), []);
   switch (type) {
@@ -26,8 +28,31 @@ export default function TextInput({
             value={value}
             setValue={setValue}
             placeholder={placeholder}
-            className={`rounded border-2 border-gray-400 w-full p-2 outline-none text-gray-800 font-medium ${inputClassName}`}
+            className={`rounded border-2 border-gray-300 w-full p-2 outline-none text-gray-800 font-medium ${inputClassName}`}
           />
+        </div>
+      );
+    }
+    case 'message': {
+      return (
+        <div className={`relative space-y-1 ${className}`}>
+          {label && (
+            <label htmlFor={id}>
+              <Typography className='text-gray-800 text-base '>
+                {label}
+              </Typography>
+            </label>
+          )}
+          <input
+            id={id}
+            value={value}
+            setValue={setValue}
+            placeholder={placeholder}
+            className={`w-full border-2 border-hray-100 outline-none p-1 py-2 text-lg font-base text-gray-700 ${inputClassName}`}
+          />
+          <span className='absolute top-0 right-2  inline-block h-9 w-9 bg-blue-500 rounded-full flex justify-center items-center '>
+            <RiSendPlaneFill className='text-white text-xl' />
+          </span>
         </div>
       );
     }

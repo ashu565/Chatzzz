@@ -1,7 +1,7 @@
 import Button from '../ui/Button';
 import Modal from '../ui/Modal';
 import TextInput from '../ui/TextInput';
-export default function JoinSecretRoom({ setClose }) {
+export default function JoinSecretRoom({ setvalue }) {
   return (
     <Modal title='We Chat Secret Rooms'>
       <TextInput type='primary' label='Enter Your Secret Room ID' />
@@ -9,7 +9,7 @@ export default function JoinSecretRoom({ setClose }) {
         <Button btnType='primary' className='mt-2'>
           Submit
         </Button>
-        <Button btnType='danger' onClick={setClose}>
+        <Button btnType='danger' onClick={() => setvalue(false)}>
           Cancel
         </Button>
       </div>

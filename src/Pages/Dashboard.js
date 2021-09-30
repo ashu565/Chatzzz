@@ -5,17 +5,9 @@ import Secret from '../Components/front/Secret';
 import Wrapper from '../Components/layouts/Wrapper';
 import Typography from '../Components/ui/Typography';
 
-import JoinSecretRoom from '../Components/Rooms/JoinSecretRoom';
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-
 export default function Dashboard() {
-  const [open, setOpen] = useState(false);
   return (
     <Wrapper className='bg-white px-2 relative '>
-      <AnimatePresence>
-        {open && <JoinSecretRoom setClose={() => setOpen(false)} />}
-      </AnimatePresence>
       <Header />
       <Typography type='caption' className='mt-4'>
         Hello{' '}
@@ -24,7 +16,7 @@ export default function Dashboard() {
       </Typography>
       <Secret />
       <Public />
-      <Footer setOpen={() => setOpen(true)} />
+      <Footer />
     </Wrapper>
   );
 }

@@ -1,8 +1,13 @@
 import { GiSpy } from 'react-icons/gi';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { dashboardVariants } from '../framer-motion/variants';
-export default function RoomGateBox({ setOpen }) {
+import { useState } from 'react';
+import CreateRoom from '../Rooms/CreateRoom';
+import JoinSecretRoom from '../Rooms/JoinSecretRoom';
+export default function RoomGateBox() {
+  const [openSecretModal, setOpenSecretModal] = useState(false);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
   const IconWrapper = ({ Component, ...props }) => {
     return (
       <motion.div
@@ -22,8 +27,17 @@ export default function RoomGateBox({ setOpen }) {
       animate='visible'
       className='absolute right-2 bottom-12 space-y-1'
     >
-      <IconWrapper onClick={setOpen} Component={GiSpy} />
-      <IconWrapper Component={AiOutlinePlus} />
+      <AnimatePresence>
+        {openSecretModal && <JoinSecretRoom setvalue={setOpenSecretModal} />}
+      </AnimatePresence>
+      <AnimatePresence>
+        {openCreateModal && <CreateRoom setvalue={setOpenCreateModal} />}
+      </AnimatePresence>
+      <IconWrapper onClick={() => setOpenSecretModal(true)} Component={GiSpy} />
+      <IconWrapper
+        onClick={() => setOpenCreateModal(true)}
+        Component={AiOutlinePlus}
+      />
     </motion.div>
   );
 }
