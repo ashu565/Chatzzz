@@ -27,13 +27,11 @@ const data = [
 export default function Home() {
   return (
     <Wrapper>
-      <div className='bg-gray-100 rounded flex flex-col justify-center items-center px-12 h-full'>
+      <div className="bg-gray-100  flex flex-col justify-center items-center px-2 h-full">
         <SwiperSection data={data} Component={SwiperCard} />
-        <div className='flex flex-col justify-center mt-10 space-y-2'>
-          <Button btnType='primary'>Enter to the Chat World</Button>
-          <div className='ml-3'>
-            <GoogleOAuth />
-          </div>
+        <div className="flex flex-col justify-center items-center mt-10 space-y-2">
+          <Button btnType="primary">Welcome to the Chat</Button>
+          <GoogleOAuth className="" />
         </div>
       </div>
     </Wrapper>

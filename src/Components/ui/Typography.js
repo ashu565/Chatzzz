@@ -3,14 +3,14 @@ export default function Typography({ children, type, className }) {
     case 'primary': {
       return (
         <h1
-          className={`font-bold text-xl text-gray-700 capitalize ${className}`}
+          className={`font-bold text-2xl text-gray-700 capitalize ${className}`}
         >
           {children}
         </h1>
       );
     }
     case 'secondary': {
-      return <h2 className='text-blue-700 text-2xl font-bold'>{children}</h2>;
+      return <h2 className="text-blue-700 text-2xl font-bold">{children}</h2>;
     }
     case 'caption': {
       return <h4 className={`text-base ${className}`}>{children}</h4>;

@@ -5,7 +5,7 @@ export default function Wrapper({ children, className }) {
       className={`w-full h-screen bg-gray-800 flex justify-center items-center`}
     >
       <div
-        className={`bg-white h-full w-96 p-2 rounded m-auto overflow-x-hidden scrollbar-hide ${className} `}
+        className={` h-full w-full md:w-6/12 lg:w-3/12  m-auto overflow-x-hidden scrollbar-hide ${className} `}
       >
         {children}
       </div>

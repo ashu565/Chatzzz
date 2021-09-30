@@ -6,11 +6,11 @@ export default function Button({ btnType, className, children, ...props }) {
       return (
         <motion.button
           variants={buttonVariants}
-          initial='hidden'
-          animate='visible'
-          whileTap='whileTap'
+          initial="hidden"
+          animate="visible"
+          whileTap="whileTap"
           {...props}
-          className={`py-2 px-6 bg-blue-500 text-white text-base font-medium rounded-lg ${className}`}
+          className={`py-2 px-6 bg-blue-500 text-white text-base font-medium rounded-md ${className}`}
         >
           {children}
         </motion.button>
@@ -20,11 +20,11 @@ export default function Button({ btnType, className, children, ...props }) {
       return (
         <motion.button
           variants={buttonVariants}
-          initial='hidden'
-          animate='visible'
-          whileTap='whileTap'
+          initial="hidden"
+          animate="visible"
+          whileTap="whileTap"
           {...props}
-          className={`py-2 px-6 bg-red-500 text-white text-base font-medium rounded-lg ${className}`}
+          className={`py-2 px-6 bg-red-500 text-white text-base font-medium rounded-md ${className}`}
         >
           {children}
         </motion.button>
@@ -34,9 +34,9 @@ export default function Button({ btnType, className, children, ...props }) {
       return (
         <motion.button
           variants={buttonVariants}
-          initial='hidden'
-          animate='visible'
-          whileTap='whileTap'
+          initial="hidden"
+          animate="visible"
+          whileTap="whileTap"
           {...props}
           className={`${className}`}
         >
