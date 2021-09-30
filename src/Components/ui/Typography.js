@@ -10,7 +10,7 @@ export default function Typography({ children, type, className }) {
       );
     }
     case 'secondary': {
-      return <h2 className="text-blue-700 text-2xl font-bold">{children}</h2>;
+      return <h2 className='text-blue-700 text-2xl font-bold'>{children}</h2>;
     }
     case 'caption': {
       return <h4 className={`text-base ${className}`}>{children}</h4>;
@@ -25,7 +25,7 @@ export default function Typography({ children, type, className }) {
 
     case 'section-heading': {
       return (
-        <h2 className={`text-red-600 text-base ${className}`}>{children}</h2>
+        <h2 className={`text-gray-800 text-base ${className}`}>{children}</h2>
       );
     }
     case 'section-description': {

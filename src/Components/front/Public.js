@@ -17,7 +17,7 @@ export default function Public() {
     );
   };
   return (
-    <div className='py-4'>
+    <div className='py-6'>
       <Typography type='section-heading' className='font-bold'>
         Public Rooms
       </Typography>
