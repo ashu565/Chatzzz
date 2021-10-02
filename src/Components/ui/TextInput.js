@@ -2,6 +2,8 @@ import Typography from './Typography';
 import { useMemo } from 'react';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { nanoid } from 'nanoid';
+import { buttonVariants } from '../framer-motion/variants';
+import { motion } from 'framer-motion';
 export default function TextInput({
   type,
   label,
@@ -10,6 +12,7 @@ export default function TextInput({
   setValue,
   inputClassName,
   className,
+  sendMessage,
 }) {
   const id = useMemo(() => nanoid(), []);
   switch (type) {
@@ -46,13 +49,20 @@ export default function TextInput({
           <input
             id={id}
             value={value}
-            setValue={setValue}
+            onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
             className={`w-full border-2 border-hray-100 outline-none p-1 py-2 text-lg font-base text-gray-700 ${inputClassName}`}
           />
-          <span className='absolute top-0 right-2  inline-block h-9 w-9 bg-blue-500 rounded-full flex justify-center items-center '>
+          <motion.span
+            variants={buttonVariants}
+            initial='hidden'
+            animate='visible'
+            whileTap='whileTap'
+            onClick={sendMessage}
+            className='absolute top-0 right-2 cursor-pointer inline-block h-9 w-9 bg-blue-500 rounded-full flex justify-center items-center '
+          >
             <RiSendPlaneFill className='text-white text-xl' />
-          </span>
+          </motion.span>
         </div>
       );
     }

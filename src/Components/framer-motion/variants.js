@@ -1,6 +1,7 @@
 export const buttonVariants = {
   hidden: {
     scale: 0,
+    scale: 0,
   },
   visible: {
     scale: 1,
@@ -9,7 +10,21 @@ export const buttonVariants = {
     scale: 0.95,
   },
 };
-
+export const chatVariants = {
+  hidden: {
+    scale: 0,
+  },
+  visible: {
+    scale: 1,
+    transition: {
+      type: 'spring',
+      duration: 0.6,
+    },
+  },
+  whileTap: {
+    scale: 0.95,
+  },
+};
 export const dashboardVariants = {
   hidden: {
     x: '-100vw',

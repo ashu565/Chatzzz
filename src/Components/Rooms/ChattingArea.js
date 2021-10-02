@@ -1,5 +1,31 @@
 import Chat from '../ui/Chat';
+import { useContext } from 'react';
+import { Context } from '../../Contexts/chatContext';
 export default function ChattingArea({ className }) {
+  const chats = useContext(Context);
+
+  const renderChats = () => {
+    return chats.state.map((msg, index) => {
+      if (msg.type === 'recieved') {
+        return (
+          <Chat
+            type={msg.type}
+            key={`${msg.data.roomid}${index}`}
+            user={msg.data.user}
+          >
+            {msg.data.message}
+          </Chat>
+        );
+      } else {
+        return (
+          <Chat key={`${msg.data.roomid}${index}`} type={msg.type}>
+            {msg.data.message}
+          </Chat>
+        );
+      }
+    });
+  };
+
   return (
     <div
       style={{
@@ -11,20 +37,7 @@ export default function ChattingArea({ className }) {
       }}
       className='w-full h-4/5 py-2 px-2 space-y-2 overflow-y-auto scrollbar-hide '
     >
-      <Chat type='notice'>Krishna Tripathi Joined</Chat>
-      <Chat type='notice'>Chanchal Mishra Joined</Chat>
-      <Chat type='notice'>Devanshu Joined</Chat>
-      <Chat type='mymessage'>Hello Devanshu How are you,Chanchal</Chat>
-      <Chat user='Devanshu Sharma' type='friend'>
-        Hey Chanchal
-      </Chat>
-      <Chat user='Krishna Tripathi' type='friend'>
-        Gullu Bhai Aisaa na
-      </Chat>
-      <Chat type='notice'>Krishna Tripathi Left</Chat>
-      <Chat type='notice'>Krishna Tripathi Joined</Chat>
-      <Chat type='notice'>Chanchal Mishra Joined</Chat>
-      <Chat type='notice'>Devanshu Joined</Chat>
+      {renderChats()}
     </div>
   );
 }
