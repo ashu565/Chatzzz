@@ -29,7 +29,7 @@ export default function TextInput({
           <input
             id={id}
             value={value}
-            setValue={setValue}
+            onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
             className={`rounded border-2 border-gray-300 w-full p-2 outline-none text-gray-800 font-medium ${inputClassName}`}
           />

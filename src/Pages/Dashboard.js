@@ -5,7 +5,7 @@ import Secret from '../Components/front/Secret';
 import Wrapper from '../Components/layouts/Wrapper';
 import Typography from '../Components/ui/Typography';
 
-export default function Dashboard() {
+function Dashboard() {
   return (
     <Wrapper className='bg-white px-2 relative '>
       <Header />
@@ -20,3 +20,5 @@ export default function Dashboard() {
     </Wrapper>
   );
 }
+
+export default Dashboard;

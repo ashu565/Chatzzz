@@ -7,15 +7,18 @@ import { Context } from '../Contexts/chatContext';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import socketio from 'socket.io-client';
 import { useParams } from 'react-router';
+
+const Endpoint = 'http://localhost:4000';
 export default function ChatRoom() {
   const chats = useContext(Context);
   const params = useParams();
   const roomid = useMemo(() => params.id, []);
+  const socket = useMemo(() => {
+    return socketio(Endpoint, {
+      withCredentials: true,
+    });
+  }, []);
   const [inputMsg, setInputMsg] = useState('');
-  const Endpoint = 'http://localhost:4000';
-  const socket = socketio(Endpoint, {
-    withCredentials: true,
-  });
   useEffect(() => {
     socket.emit('create', { room: roomid, name: 'Ashutosh Singh' });
     socket.on('user-joined', (name) => {
@@ -46,6 +49,7 @@ export default function ChatRoom() {
       name: 'Ashutosh Singh',
       message: inputMsg,
     });
+    setInputMsg('');
   };
   return (
     <Wrapper className='bg-white'>
