@@ -1,11 +1,25 @@
 import Chat from '../ui/Chat';
-import { useContext } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import { Context } from '../../Contexts/chatContext';
-export default function ChattingArea({ className }) {
+export default function ChattingArea({ roomid }) {
   const chats = useContext(Context);
+
+  const chatRef = useRef();
+  useEffect(() => {
+    if (chatRef.current.lastElementChild) {
+      const lastElement = 150;
+      const visibleHeight = chatRef.current.offsetHeight;
+      const containerHeight = chatRef.current.scrollHeight;
+      const scrollOffset = chatRef.current.scrollTop + visibleHeight;
+      if (containerHeight - lastElement <= scrollOffset) {
+        chatRef.current.scrollTop = chatRef.current.scrollHeight;
+      }
+    }
+  });
 
   const renderChats = () => {
     return chats.state.map((msg, index) => {
+      if (msg.data.roomid !== roomid) return null;
       if (msg.type === 'recieved') {
         return (
           <Chat
@@ -28,6 +42,7 @@ export default function ChattingArea({ className }) {
 
   return (
     <div
+      ref={chatRef}
       style={{
         backgroundImage:
           "linear-gradient(to right bottom,rgb(0,0,0),rgba(0,0,0,0.4)),url('/assets/images/chat-bg.jpg')",

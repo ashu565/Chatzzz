@@ -10,7 +10,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={Home} />
         <AuthRoute exact path='/dashboard' component={Dashboard} />
-        <Route exact path='/room/:id' component={ChatRoom} />
+        <AuthRoute exact path='/room/:id' component={ChatRoom} />
       </Switch>
     </div>
   );

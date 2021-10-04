@@ -2,15 +2,16 @@ import GoogleLogin from 'react-google-login';
 import Button from '../ui/Button';
 import { Context } from '../../Contexts/userContext';
 import { useContext } from 'react';
+import { useHistory } from 'react-router';
 
 export default function GoogleOAuth({ ...props }) {
   const user = useContext(Context);
-
+  const history = useHistory();
   const SuccessLoginHandler = (res) => {
-    console.log(res.profileObj);
     localStorage.setItem('googleLogin', JSON.stringify(res.profileObj));
     const profile = { ...res.profileObj };
     user.Login(profile);
+    history.push('/dashboard');
   };
   const FailureLoginHandler = (err) => {
     console.log(err);

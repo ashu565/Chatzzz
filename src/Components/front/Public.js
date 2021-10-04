@@ -1,31 +1,55 @@
 import Typography from '../ui/Typography';
+import api from '../../api';
+import { useState, useEffect } from 'react';
+import ProfileCard from './profileCard';
+
+import moment from 'moment';
+import Spinner from '../ui/Spinner';
 
 export default function Public() {
-  const ProfileCard = ({ name }) => {
-    return (
-      <div className='flex items-center'>
-        <img
-          className='w-12 h-12 object-cover rounded-full mr-3'
-          src='/assets/images/avatar2.jpg'
-          alt='avatar'
-        ></img>
-        <div>
-          <Typography type='profile-heading'>{name}</Typography>
-          <Typography className='text-xs'>Created 2 months ago</Typography>
-        </div>
-      </div>
-    );
+  const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(async () => {
+    const roomData = await api.get('/api/public-rooms');
+    const publicRooms = [...roomData.data.rooms];
+    if (publicRooms.length > 0) {
+      setRooms(publicRooms);
+    }
+    setLoading(false);
+  }, []);
+
+  const renderPublicRooms = () => {
+    return rooms.map((room) => {
+      const timeFromNow = moment(room.createdAt).fromNow();
+      return (
+        <ProfileCard
+          roomid={room.roomid}
+          key={room._id}
+          timeFromNow={timeFromNow}
+          name={room.name}
+          url={room.image}
+        />
+      );
+    });
   };
+
   return (
     <div className='py-6'>
       <Typography type='section-heading' className='font-bold'>
         Public Rooms
       </Typography>
-      <div className='h-60 mt-2 space-y-3'>
-        <ProfileCard name='Ajay Yadav' />
-        <ProfileCard name='Dishka Garg' />
-        <ProfileCard name='Manpreet Kaur' />
-      </div>
+      {loading && <Spinner />}
+      {!loading && (
+        <div className='h-60 mt-2 space-y-2 overflow-y-auto scrollbar-hide'>
+          {rooms.length === 0 ? (
+            <Typography type='section-description' className='text-center'>
+              Oopss, We don't have public rooms for now please create some's
+            </Typography>
+          ) : (
+            renderPublicRooms()
+          )}
+        </div>
+      )}
     </div>
   );
 }

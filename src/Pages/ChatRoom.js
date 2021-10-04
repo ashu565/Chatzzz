@@ -1,36 +1,52 @@
 import Header from '../Components/front/Header';
 import Wrapper from '../Components/layouts/Wrapper';
 import ChattingArea from '../Components/Rooms/ChattingArea';
-import Button from '../Components/ui/Button';
 import TextInput from '../Components/ui/TextInput';
+
 import { Context } from '../Contexts/chatContext';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import socketio from 'socket.io-client';
 import { useParams } from 'react-router';
+import { Context as UserContext } from '../Contexts/userContext';
 
-const Endpoint = 'http://localhost:4000';
 export default function ChatRoom() {
   const chats = useContext(Context);
   const params = useParams();
   const roomid = useMemo(() => params.id, []);
-  const socket = useMemo(() => {
-    return socketio(Endpoint, {
+  const user = useContext(UserContext);
+  const [inputMsg, setInputMsg] = useState('');
+  const [socket, setSocket] = useState();
+
+  useEffect(() => {
+    // const Endpoint = 'http://localhost:4000';
+    const Endpoint = 'https://chatting-chatzzz.herokuapp.com';
+    const socketTEMP = socketio(Endpoint, {
       withCredentials: true,
     });
+    setSocket(socketTEMP);
   }, []);
-  const [inputMsg, setInputMsg] = useState('');
+
   useEffect(() => {
-    socket.emit('create', { room: roomid, name: 'Ashutosh Singh' });
-    socket.on('user-joined', (name) => {
-      Notice(name, roomid);
-    });
-    socket.on('toClient', ({ name, message }) => {
-      Recieved(message, roomid, name);
-    });
-    socket.on('user-left', (name) => {
-      console.log(name);
-    });
-  }, []);
+    // console.log(socket)
+    if (socket) {
+      socket.emit('create', { room: roomid, name: user.state.givenName });
+      socket.on('user-joined', (name) => {
+        const message = `${name} Joined`;
+        Notice(message, roomid, name);
+      });
+      socket.on('toClient', ({ name, message }) => {
+        Recieved(message, roomid, name);
+      });
+      socket.on('user-left', (name) => {
+        const message = `${name} Left`;
+        Notice(message, roomid, name);
+      });
+
+      return function cleanup() {
+        socket.close();
+      };
+    }
+  }, [socket]);
 
   const Send = (message, roomid) => {
     chats.sendMessage(message, roomid);
@@ -38,8 +54,8 @@ export default function ChatRoom() {
   const Recieved = (message, roomid, name) => {
     chats.recievedMessage(message, roomid, name);
   };
-  const Notice = (name, roomid) => {
-    chats.recievedNotice(name, roomid);
+  const Notice = (message, roomid, name) => {
+    chats.recievedNotice(message, roomid, name);
   };
   const HandleSendMessage = () => {
     if (!inputMsg) return;
@@ -54,7 +70,7 @@ export default function ChatRoom() {
   return (
     <Wrapper className='bg-white'>
       <Header />
-      <ChattingArea />
+      <ChattingArea roomid={roomid} />
       <TextInput
         value={inputMsg}
         setValue={setInputMsg}
