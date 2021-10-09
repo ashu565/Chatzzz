@@ -62,7 +62,7 @@ export default function ChatRoom() {
     Send(inputMsg, roomid);
     socket.emit('toServer', {
       room: roomid,
-      name: 'Ashutosh Singh',
+      name: user.state.name,
       message: inputMsg,
     });
     setInputMsg('');
