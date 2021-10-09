@@ -15,7 +15,6 @@ export default function Secret() {
   const [rooms, setRooms] = useState([]);
   const user = useContext(Context);
   const [loading, setLoading] = useState(true);
-
   useEffect(async () => {
     const roomData = await api.get(`/api/private-rooms/${user.state.googleId}`);
     const secretRooms = [...roomData.data.rooms];
@@ -27,6 +26,7 @@ export default function Secret() {
   const renderSecretRooms = () => {
     return rooms.map((room) => {
       const timeFromNow = moment(room.createdAt).fromNow();
+      console.log(room);
       return (
         <ProfileCard
           roomid={room.roomid}

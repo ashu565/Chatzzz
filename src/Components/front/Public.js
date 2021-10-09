@@ -21,6 +21,7 @@ export default function Public() {
   const renderPublicRooms = () => {
     return rooms.map((room) => {
       const timeFromNow = moment(room.createdAt).fromNow();
+      console.log('public', room);
       return (
         <ProfileCard
           roomid={room.roomid}

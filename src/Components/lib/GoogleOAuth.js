@@ -10,6 +10,7 @@ export default function GoogleOAuth({ ...props }) {
   const SuccessLoginHandler = (res) => {
     localStorage.setItem('googleLogin', JSON.stringify(res.profileObj));
     const profile = { ...res.profileObj };
+    console.log(profile);
     user.Login(profile);
     history.push('/dashboard');
   };
